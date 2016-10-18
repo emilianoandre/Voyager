@@ -20,11 +20,6 @@ import javax.ws.rs.ext.Provider;
 
 import org.glassfish.jersey.internal.util.Base64;
 
-import com.stormpath.sdk.account.Account;
-import com.stormpath.sdk.api.ApiKey;
-import com.stormpath.sdk.api.ApiKeyList;
-import com.voyagerproject.service.utils.StormpathUtils;
-
 /**
  * @author EAndre
  * 
@@ -111,19 +106,7 @@ public class AuthenticationFilter implements javax.ws.rs.container.ContainerRequ
      */
     private boolean isUserAllowed(final String accountHref, final String apiKey, final String apiSecret, final Set<String> rolesSet)
     {
-        boolean isAllowed = false;
-        
-        Account account = StormpathUtils.client.getResource(accountHref, Account.class);
-
-        ApiKeyList apiKeyList = account.getApiKeys();
-
-        //If account already has an API Key
-        for(Iterator<ApiKey> iter = apiKeyList.iterator(); iter.hasNext();) {
-        	ApiKey element = iter.next();
-        	if (apiKey.equals(element.getId()) && apiSecret.equals(element.getSecret())) {
-        		isAllowed = true;
-        	}
-        }
+        boolean isAllowed = true;
         
         return isAllowed;
     }
