@@ -32,6 +32,7 @@ import com.voyagerproject.service.utils.StormpathUtils;
 
  
 /**
+ * Class that holds the services for login, logout and register
  * @author EAndre
  *
  */
@@ -40,7 +41,9 @@ public class LoginService {
 	
 	private static final Log log = LogFactory.getLog(LoginService.class);
 	
+	// Controllers
 	UserController userController = new UserController();
+	
 	@Context
     private HttpServletResponse servletResponse;
 	@Context
@@ -135,7 +138,7 @@ public class LoginService {
 	 * @return String 
 	 * @throws IOException 
 	 */
-	@GET
+	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)	
 	@PermitAll
