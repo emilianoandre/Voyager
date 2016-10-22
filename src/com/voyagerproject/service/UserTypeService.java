@@ -79,7 +79,7 @@ public class UserTypeService {
 	@Consumes(MediaType.APPLICATION_JSON)	
 	@PermitAll	
 	@Path("/userType")
-	public VoyagerServiceResponse createUserType(String name) throws IOException {		
+	public VoyagerServiceResponse createUserType(String name) throws IOException {
 		
 		DomainUserType userType;
 		
