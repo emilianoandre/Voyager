@@ -8,12 +8,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author eandre
  *
  */
-public class AuthBean {
+public class JsonAuth {
 
 	private String userName;
 	private String password;
 	@JsonCreator
-	public AuthBean(@JsonProperty("userName")String userName, @JsonProperty("password")String password) {
+	public JsonAuth(@JsonProperty("userName")String userName, @JsonProperty("password")String password) {
 		this.setUserName(userName);
 		this.setPassword(password);
 	}

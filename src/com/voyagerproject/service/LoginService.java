@@ -27,7 +27,7 @@ import com.stormpath.sdk.api.ApiKey;
 import com.stormpath.sdk.api.ApiKeyList;
 import com.voyagerproject.domain.controller.UserController;
 import com.voyagerproject.domain.entities.DomainUser;
-import com.voyagerproject.json.entities.AuthBean;
+import com.voyagerproject.json.entities.JsonAuth;
 import com.voyagerproject.service.utils.StormpathUtils;
 
  
@@ -115,7 +115,7 @@ public class LoginService {
 	@Consumes(MediaType.APPLICATION_JSON)	
 	@PermitAll
 	@Path("/login")
-	public DomainUser login(AuthBean authBean) throws IOException {
+	public DomainUser login(JsonAuth authBean) throws IOException {
 		DomainUser user = new DomainUser();
 		
 		// Log into the DB

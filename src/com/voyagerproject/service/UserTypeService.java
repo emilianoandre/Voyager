@@ -23,7 +23,7 @@ import com.voyagerproject.domain.entities.DomainUserType;
 import com.voyagerproject.service.response.VoyagerServiceResponse;
 
 /**
- * Class that holds the CRUD methods for the types (UserType, BugSystemType, etc)
+ * Class that holds the CRUD methods for the UserType class
  * @author eandre
  *
  */
@@ -87,7 +87,7 @@ public class UserTypeService {
 			userType = userTypeController.createUserType(name);
 			return new VoyagerServiceResponse(userType);
 		} catch (Exception ex) {			
-			log.error("Failed to create user types", ex);
+			log.error("Failed to create user type", ex);
 			String error = "Failed to create user type. " + ex.getMessage();
 			return new VoyagerServiceResponse(500, error);
 		}
@@ -122,7 +122,7 @@ public class UserTypeService {
 	/**
 	 * Service that deletes a user type
 	 * @param userTypeId: id of the user type to delete
-	 * @return userTypes list in json format 
+	 * @return VoyagerServiceResponse 
 	 * @throws IOException 
 	 */
 	@PUT
