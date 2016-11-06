@@ -20,7 +20,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.voyagerproject.domain.controller.UserController;
 import com.voyagerproject.domain.entities.DomainUser;
-import com.voyagerproject.json.entities.JsonUser;
 import com.voyagerproject.service.response.VoyagerServiceResponse;
 
 /**
@@ -85,13 +84,11 @@ public class UserService {
 	@Consumes(MediaType.APPLICATION_JSON)	
 	@PermitAll	
 	@Path("/user")
-	public VoyagerServiceResponse createUser(JsonUser jsonUser) throws IOException {
-		
-		DomainUser user;
+	public VoyagerServiceResponse createUser(DomainUser user) throws IOException {
 		
 		try {
-			user = userController.createUser(jsonUser.getUserName(), jsonUser.getName(), jsonUser.getEmail(), 
-					jsonUser.getPassword(), jsonUser.getUserTypeId());
+			user = userController.createUser(user.getUserName(), user.getName(), user.getEmail(), 
+					user.getPassword(), user.getUserType().getIdUserType());
 			return new VoyagerServiceResponse(user);
 		} catch (Exception ex) {			
 			log.error("Failed to create user", ex);

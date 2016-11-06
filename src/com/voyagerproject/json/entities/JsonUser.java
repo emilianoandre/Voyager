@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class JsonUser {
 
+	private int idUser;
 	private String userName;
 	private String name;
 	private String email;
@@ -28,6 +29,32 @@ public class JsonUser {
 		this.setUserTypeId(userTypeId);
 	}
 	
+	@JsonCreator
+	public JsonUser(@JsonProperty("idUser")int idUser, @JsonProperty("userName")String userName, 
+			@JsonProperty("name")String name, @JsonProperty("password")String password, 
+			@JsonProperty("email")String email,	@JsonProperty("userTypeId")int userTypeId) {
+		this.setIdUser(idUser);
+		this.setUserName(userName);
+		this.setPassword(password);
+		this.setName(name);
+		this.setEmail(email);
+		this.setUserTypeId(userTypeId);
+	}
+	
+	/**
+	 * @return the idUser
+	 */
+	public int getIdUser() {
+		return idUser;
+	}
+
+	/**
+	 * @param idUser the idUser to set
+	 */
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
+
 	/**
 	 * @return the name
 	 */
