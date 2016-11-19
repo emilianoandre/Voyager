@@ -19,7 +19,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.voyagerproject.domain.controller.UserTypeController;
-import com.voyagerproject.domain.entities.DomainUserType;
+import com.voyagerproject.domain.entities.DomainType;
 import com.voyagerproject.service.response.VoyagerServiceResponse;
 
 /**
@@ -53,7 +53,7 @@ public class UserTypeService {
 	@PermitAll	
 	@Path("/userType")
 	public VoyagerServiceResponse getUserTypes() throws IOException {
-		Collection<DomainUserType> userTypes;
+		Collection<DomainType> userTypes;
 		
 		// Log into de DB
 		try {
@@ -81,7 +81,7 @@ public class UserTypeService {
 	@Path("/userType")
 	public VoyagerServiceResponse createUserType(String name) throws IOException {
 		
-		DomainUserType userType;
+		DomainType userType;
 		
 		try {
 			userType = userTypeController.createUserType(name);
@@ -106,7 +106,7 @@ public class UserTypeService {
 	@Consumes(MediaType.APPLICATION_JSON)	
 	@PermitAll	
 	@Path("/userType")
-	public VoyagerServiceResponse updateUserType(DomainUserType userType) throws IOException {
+	public VoyagerServiceResponse updateUserType(DomainType userType) throws IOException {
 		
 		try {
 			userTypeController.updateUserType(userType);

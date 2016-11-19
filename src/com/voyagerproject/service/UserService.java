@@ -88,7 +88,7 @@ public class UserService {
 		
 		try {
 			user = userController.createUser(user.getUserName(), user.getName(), user.getEmail(), 
-					user.getPassword(), user.getUserType().getIdUserType());
+					user.getPassword(), user.getUserType().getIdType());
 			return new VoyagerServiceResponse(user);
 		} catch (Exception ex) {			
 			log.error("Failed to create user", ex);
