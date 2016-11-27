@@ -44,7 +44,7 @@ public class UserTypeService {
 	/**
 	 * Service that gets all the user types
 	 * 
-	 * @return userTypes list in json format 
+	 * @return VoyagerServiceResponse userTypes list in json format 
 	 * @throws Exception 
 	 */
 	@GET
@@ -71,7 +71,7 @@ public class UserTypeService {
 	 * Service that creates a user type from a user type name
 	 * 
 	 * @param name: new user type name
-	 * 
+	 * @return VoyagerServiceResponse the created userType
 	 * @throws Exception 
 	 */
 	@POST
@@ -98,7 +98,7 @@ public class UserTypeService {
 	 * Service that updates a user type
 	 * 
 	 * @param userType: updated user type
-	 * @return the updated userType
+	 * @return VoyagerServiceResponse with the updated userType
 	 * @throws Exception 
 	 */
 	@PUT

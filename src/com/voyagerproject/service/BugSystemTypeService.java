@@ -44,7 +44,7 @@ public class BugSystemTypeService {
 	/**
 	 * Service that gets all the bugSystem types
 	 * 
-	 * @return bugSystemTypes list in json format 
+	 * @return VoyagerServiceResponse bugSystemTypes list in json format 
 	 * @throws Exception 
 	 */
 	@GET
@@ -71,7 +71,7 @@ public class BugSystemTypeService {
 	 * Service that creates a bugSystem type from a bugSystem type name
 	 * 
 	 * @param name: new bugSystem type name
-	 * 
+	 * @return VoyagerServiceResponse 
 	 * @throws Exception 
 	 */
 	@POST
@@ -98,7 +98,7 @@ public class BugSystemTypeService {
 	 * Service that updates a bugSystem type
 	 * 
 	 * @param bugSystemType: updated bugSystem type
-	 * @return the updated bugSystemType
+	 * @return VoyagerServiceResponse the updated bugSystemType
 	 * @throws Exception 
 	 */
 	@PUT

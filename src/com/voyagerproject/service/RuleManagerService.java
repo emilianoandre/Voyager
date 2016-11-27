@@ -44,7 +44,7 @@ public class RuleManagerService {
 	/**
 	 * Service that gets all the ruleManagers
 	 * 
-	 * @return ruleManagers list in json format 
+	 * @return VoyagerServiceResponse ruleManagers list in json format 
 	 * @throws Exception 
 	 */
 	@GET
@@ -71,11 +71,7 @@ public class RuleManagerService {
 	 * 
 	 * Service that creates a ruleManager from a ruleManager name
 	 * 
-	 * @param ruleManagerName: RuleManagerName for the new ruleManager
-	 * @param name: Name of the new ruleManager
-	 * @param email: email of the new ruleManager
-	 * @param password: password of the new ruleManager
-	 * @param ruleManagerTypeId: RuleManager Type of the new ruleManager
+	 * @param ruleManager an object with the following attributes: name, url, ruleManagerType
 	 * @return VoyagerServiceResponse with the created ruleManager
 	 * @throws IOException
 	 */
@@ -87,7 +83,8 @@ public class RuleManagerService {
 	public VoyagerServiceResponse createRuleManager(DomainRuleManager ruleManager) throws IOException {
 		
 		try {
-			ruleManager = ruleManagerController.createRuleManager(ruleManager.getName(), ruleManager.getUrl(), ruleManager.getRuleManagerType().getIdType());
+			ruleManager = ruleManagerController.createRuleManager(ruleManager.getName(), ruleManager.getUrl(), 
+					ruleManager.getRuleManagerType());
 			return new VoyagerServiceResponse(ruleManager);
 		} catch (Exception ex) {			
 			log.error("Failed to create ruleManager", ex);
@@ -101,7 +98,7 @@ public class RuleManagerService {
 	 * Service that updates a ruleManager
 	 * 
 	 * @param ruleManager: updated ruleManager
-	 * @return the updated ruleManager
+	 * @return VoyagerServiceResponse with the updated ruleManager
 	 * @throws Exception 
 	 */
 	@PUT

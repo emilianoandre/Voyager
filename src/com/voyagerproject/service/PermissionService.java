@@ -44,7 +44,7 @@ public class PermissionService {
 	/**
 	 * Service that gets all the permission types
 	 * 
-	 * @return permissions list in json format 
+	 * @return VoyagerServiceResponse permissions list in json format 
 	 * @throws Exception 
 	 */
 	@GET
@@ -71,7 +71,7 @@ public class PermissionService {
 	 * Service that creates a permission type from a permission type name
 	 * 
 	 * @param name: new permission type name
-	 * 
+	 * @return VoyagerServiceResponse with the created permission
 	 * @throws Exception 
 	 */
 	@POST
@@ -98,7 +98,7 @@ public class PermissionService {
 	 * Service that updates a permission type
 	 * 
 	 * @param permission: updated permission type
-	 * @return the updated permission
+	 * @return VoyagerServiceResponse with the updated permission
 	 * @throws Exception 
 	 */
 	@PUT

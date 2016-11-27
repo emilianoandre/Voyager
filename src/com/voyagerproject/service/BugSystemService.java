@@ -44,7 +44,7 @@ public class BugSystemService {
 	/**
 	 * Service that gets all the bugSystems
 	 * 
-	 * @return bugSystems list in json format 
+	 * @return VoyagerServiceResponse bugSystems list in json format 
 	 * @throws Exception 
 	 */
 	@GET
@@ -71,11 +71,7 @@ public class BugSystemService {
 	 * 
 	 * Service that creates a bugSystem from a bugSystem name
 	 * 
-	 * @param bugSystemName: BugSystemName for the new bugSystem
-	 * @param name: Name of the new bugSystem
-	 * @param email: email of the new bugSystem
-	 * @param password: password of the new bugSystem
-	 * @param bugSystemTypeId: BugSystem Type of the new bugSystem
+	 * @param bugSystem an object with the following attributes: name, url, bugSystemType
 	 * @return VoyagerServiceResponse with the created bugSystem
 	 * @throws IOException
 	 */
@@ -87,7 +83,7 @@ public class BugSystemService {
 	public VoyagerServiceResponse createBugSystem(DomainBugSystem bugSystem) throws IOException {
 		
 		try {
-			bugSystem = bugSystemController.createBugSystem(bugSystem.getName(), bugSystem.getUrl(), bugSystem.getBugSystemType().getIdType());
+			bugSystem = bugSystemController.createBugSystem(bugSystem.getName(), bugSystem.getUrl(), bugSystem.getBugSystemType());
 			return new VoyagerServiceResponse(bugSystem);
 		} catch (Exception ex) {			
 			log.error("Failed to create bugSystem", ex);
@@ -101,7 +97,7 @@ public class BugSystemService {
 	 * Service that updates a bugSystem
 	 * 
 	 * @param bugSystem: updated bugSystem
-	 * @return the updated bugSystem
+	 * @return VoyagerServiceResponse the updated bugSystem
 	 * @throws Exception 
 	 */
 	@PUT

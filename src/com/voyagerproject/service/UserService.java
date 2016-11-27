@@ -44,7 +44,7 @@ public class UserService {
 	/**
 	 * Service that gets all the users
 	 * 
-	 * @return users list in json format 
+	 * @return VoyagerServiceResponse users list in json format 
 	 * @throws Exception 
 	 */
 	@GET
@@ -88,7 +88,7 @@ public class UserService {
 		
 		try {
 			user = userController.createUser(user.getUserName(), user.getName(), user.getEmail(), 
-					user.getPassword(), user.getUserType().getIdType());
+					user.getPassword(), user.getUserType());
 			return new VoyagerServiceResponse(user);
 		} catch (Exception ex) {			
 			log.error("Failed to create user", ex);
@@ -102,7 +102,7 @@ public class UserService {
 	 * Service that updates a user
 	 * 
 	 * @param user: updated user
-	 * @return the updated user
+	 * @return VoyagerServiceResponse with the updated user
 	 * @throws Exception 
 	 */
 	@PUT

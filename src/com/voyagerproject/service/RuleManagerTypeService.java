@@ -44,7 +44,7 @@ public class RuleManagerTypeService {
 	/**
 	 * Service that gets all the ruleManager types
 	 * 
-	 * @return ruleManagerTypes list in json format 
+	 * @return VoyagerServiceResponse ruleManagerTypes list in json format 
 	 * @throws Exception 
 	 */
 	@GET
@@ -71,7 +71,7 @@ public class RuleManagerTypeService {
 	 * Service that creates a ruleManager type from a ruleManager type name
 	 * 
 	 * @param name: new ruleManager type name
-	 * 
+	 * @return VoyagerServiceResponse the created ruleManagerType
 	 * @throws Exception 
 	 */
 	@POST
@@ -98,7 +98,7 @@ public class RuleManagerTypeService {
 	 * Service that updates a ruleManager type
 	 * 
 	 * @param ruleManagerType: updated ruleManager type
-	 * @return the updated ruleManagerType
+	 * @return VoyagerServiceResponse the updated ruleManagerType
 	 * @throws Exception 
 	 */
 	@PUT
