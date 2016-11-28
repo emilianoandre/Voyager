@@ -125,7 +125,7 @@ public class UserService {
 	
 	/**
 	 * Service that deletes a user
-	 * @param userName: name of the user to delete
+	 * @param userId: id of the user to delete
 	 * @return VoyagerServiceResponse
 	 * @throws IOException 
 	 */
@@ -134,10 +134,10 @@ public class UserService {
 	@Consumes(MediaType.APPLICATION_JSON)	
 	@PermitAll	
 	@Path("/deleteUser")
-	public VoyagerServiceResponse deleteUser(String userName) throws IOException {
+	public VoyagerServiceResponse deleteUser(Integer userId) throws IOException {
 		
 		try {
-			userController.deleteUser(userName);
+			userController.deleteUser(userId);
 			return new VoyagerServiceResponse();
 		} catch (Exception ex) {
 			log.error("Failed to delete user", ex);
