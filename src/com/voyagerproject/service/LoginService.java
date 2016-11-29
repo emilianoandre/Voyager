@@ -1,34 +1,24 @@
 package com.voyagerproject.service;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.CookieParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.stormpath.sdk.account.Account;
-import com.stormpath.sdk.api.ApiKey;
-import com.stormpath.sdk.api.ApiKeyList;
 import com.voyagerproject.domain.controller.UserController;
 import com.voyagerproject.domain.entities.DomainUser;
 import com.voyagerproject.json.entities.JsonAuth;
-import com.voyagerproject.service.utils.StormpathUtils;
+import com.voyagerproject.service.response.VoyagerServiceResponse;
 
  
 /**
@@ -50,64 +40,10 @@ public class LoginService {
 	private HttpServletRequest servletRequest;
 	
 	/**
-	 * Returns the apiKey for the user to be used by the UI
-	 * 
-	 * @param accountHref
-	 * @return
-	 * @throws Exception
-	 */
-	@SuppressWarnings("rawtypes")	
-	@GET
-    @Produces(MediaType.APPLICATION_JSON)
-	@PermitAll
-	@Path("/getApiKey")
-	public GenericEntity getApiKey(@CookieParam("accountHref") String accountHref) throws Exception {
-
-        Account account = StormpathUtils.client.getResource(accountHref, Account.class);
-
-        ApiKeyList apiKeyList = account.getApiKeys();
-
-        boolean hasApiKey = false;
-        String apiKeyId = "";
-        String apiSecret = "";
-
-        //If account already has an API Key
-        for(Iterator<ApiKey> iter = apiKeyList.iterator(); iter.hasNext();) {
-            hasApiKey = true;
-            ApiKey element = iter.next();
-            apiKeyId = element.getId();
-            apiSecret = element.getSecret();
-        }
-        
-        //If account doesn't have an API Key, generate one
-        if(hasApiKey == false) {
-            ApiKey newApiKey = account.createApiKey();
-            apiKeyId = newApiKey.getId();
-            apiSecret = newApiKey.getSecret();
-        }
-
-        //Get the username of the account
-        String username = account.getUsername();
-
-        //Make a JSON object with the key and secret to send back to the client
-        Map<String, String> response = new HashMap<>();
-
-        response.put("api_key", apiKeyId);
-        response.put("api_secret", apiSecret);
-        response.put("username", username);
-        
-        @SuppressWarnings("unchecked")
-		GenericEntity<Map<String, String>> responseEntity = new GenericEntity(response, Map.class);
-        
-        return responseEntity;
-    }
-	
-	/**
 	 * Login service
 	 * 
-	 * @param String user
-	 * @param String password
-	 * @return String 
+	 * @param authBean json object with userName and password properties
+	 * @return User 
 	 * @throws IOException 
 	 */
 	@POST
@@ -115,26 +51,24 @@ public class LoginService {
 	@Consumes(MediaType.APPLICATION_JSON)	
 	@PermitAll
 	@Path("/login")
-	public DomainUser login(JsonAuth authBean) throws IOException {
+	public VoyagerServiceResponse login(JsonAuth authBean) throws IOException {
 		DomainUser user = new DomainUser();
 		
 		// Log into the DB
 		try {
 			user = userController.logIn(authBean.getUserName(), authBean.getPassword());
+			return new VoyagerServiceResponse(user.getToken());
 		} catch (Exception ex) {
 			log.error("Failed to authenticate user", ex);
-			servletResponse.sendError(401, ex.getMessage());            
-            return null;
+			return new VoyagerServiceResponse(401, ex.getMessage());
 		}
-		
-        return user;
 	}
 	
 	/**
 	 * Logout service
 	 * 
-	 * @param String user
-	 * @param String password
+	 * @param the user token
+	 * @return 
 	 * @return String 
 	 * @throws IOException 
 	 */
@@ -143,15 +77,15 @@ public class LoginService {
 	@Consumes(MediaType.APPLICATION_JSON)	
 	@PermitAll
 	@Path("/logout")
-	public void logout(@HeaderParam("userName") String userName, @HeaderParam("password") String password) throws IOException {
+	public VoyagerServiceResponse logout(String token) throws IOException {
 		
 		// Log into de DB
 		try {
-			userController.logOut(userName, password);
+			userController.logOut(token);
+			return new VoyagerServiceResponse();
 		} catch (Exception ex) {
 			log.error("Failed to log out user", ex);
-            servletResponse.sendError(401, ex.getMessage());
-            return;
+            return new VoyagerServiceResponse(401, ex.getMessage());
 		}
 	}
 }

@@ -71,11 +71,7 @@ public class UserService {
 	 * 
 	 * Service that creates a user from a user name
 	 * 
-	 * @param userName: UserName for the new user
-	 * @param name: Name of the new user
-	 * @param email: email of the new user
-	 * @param password: password of the new user
-	 * @param userTypeId: User Type of the new user
+	 * @param user domain user object
 	 * @return VoyagerServiceResponse with the created user
 	 * @throws IOException
 	 */
